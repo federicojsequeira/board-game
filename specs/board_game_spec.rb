@@ -13,7 +13,9 @@ describe BoardGame do
 	 	events = []
 	 	events << Event.new
 	 	squares = []
-	 	2.times { squares << Square.new(events) }	 	
+	 	2.times do |i| 
+	 		squares << Square.new(i, events)
+	 	end
 
 	 	@board_game = BoardGame.new players, squares
   end
@@ -33,7 +35,7 @@ describe BoardGame do
 	 		expect(same_name_players).to be_nil
 	  end
 
-	  it "players must be on first square" do
+	  it "players current square must be first square" do
 	  	player_squares = []
 	  	@board_game.players.count.times { player_squares << 1 }
 	  	expect(@board_game.players.map(&:current_square)).to eq player_squares

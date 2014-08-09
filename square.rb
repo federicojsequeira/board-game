@@ -1,8 +1,9 @@
 class Square
-	attr_accessor :events
+	attr_accessor :number, :event
 
-	def initialize events
-		@events = events
+	def initialize number, event
+		@number = number
+		@event = event
 	end
 
 end
