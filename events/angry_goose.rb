@@ -1,0 +1,2 @@
+class AngryGoose < Event
+end

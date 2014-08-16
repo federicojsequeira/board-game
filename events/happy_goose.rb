@@ -1,0 +1,3 @@
+class HappyGoose < Event
+	
+end

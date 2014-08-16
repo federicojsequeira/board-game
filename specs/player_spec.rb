@@ -11,7 +11,7 @@ describe Player do
 	 	players = [@player, player2]
 
 	 	squares = []
-	 	10.times do |i| 
+	 	63.times do |i| 
 	 		squares << Square.new(i)
 	 	end
 
@@ -34,30 +34,22 @@ describe Player do
 	 		@player.move(5)
 	 		expect(@player.current_square).to be 10
 	  end
+  end
 
-	  it "should run square rule" #do
-			# @player.current_square = 6
-	  # 	@player.board_game.squares[6].event = Event.new
+  describe "methods" do
+  	it "should return next closest goose square number" do
+  		@player.current_square = 6
+  		expect(@player.next_goose_square_number).to eq 9
+  		@player.current_square = 19
+  		expect(@player.next_goose_square_number).to eq 23
+  	end
 
-	  # 	@player.board_game.squares[6].event.direction = Direction.new('down')
-	  # 	@player.board_game.squares[6].event.number = 4
-	 	# 	@player.run_event
-	 	# 	expect(@player.current_square).to be 2
-
-			# @player.current_square = 6
-	  # 	@player.board_game.squares[6].event.direction = Direction.new('up')
-	  # 	@player.board_game.squares[6].event.number = 6
-	 	# 	@player.run_event
-	 	# 	expect(@player.current_square).to be 10
-
-			# @player.current_square = 2
-	  # 	@player.board_game.squares[2].event.direction = Direction.new('down')
-	  # 	@player.board_game.squares[2].event.number = 6
-
-	 	# 	@player.run_event
-	 	# 	expect(@player.current_square).to be 0	 		
-	  # end
-
+  	it "should return previous closest goose square number" do
+  		@player.current_square = 6
+  		expect(@player.previous_goose_square_number).to eq 5
+  		@player.current_square = 19
+  		expect(@player.previous_goose_square_number).to eq 18
+  	end
   end
 
 end

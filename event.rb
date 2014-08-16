@@ -2,11 +2,12 @@ require "./direction"
 class Event
 	attr_accessor :name
 
-	def initialize name
-		@name = name
+	def name
+		self.nil? ? '' : self.class_name.split(/(?=[A-Z])/).join(' ')
 	end
 
-	def name
-		@name.split('_').each { |w| w.capitalize! }.join(' ')
+	def class_name
+		self.class.name
 	end
+
 end
