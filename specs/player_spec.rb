@@ -12,7 +12,7 @@ describe Player do
 
 	 	squares = []
 	 	10.times do |i| 
-	 		squares << Square.new(i, Event.new)
+	 		squares << Square.new(i)
 	 	end
 
 	 	board_game = BoardGame.new players, squares
@@ -33,34 +33,30 @@ describe Player do
 
 	 		@player.move(5)
 	 		expect(@player.current_square).to be 10
-
-			@player.current_square = 6
-	 		@player.move(6)
-	 		expect(@player.current_square).to be 10
 	  end
 
-	  it "should run square rule" do
-			@player.current_square = 6
-	  	@player.board_game.squares[6].event = Event.new
+	  it "should run square rule" #do
+			# @player.current_square = 6
+	  # 	@player.board_game.squares[6].event = Event.new
 
-	  	@player.board_game.squares[6].event.direction = Direction.new('down')
-	  	@player.board_game.squares[6].event.number = 4
-	 		@player.run_event
-	 		expect(@player.current_square).to be 2
+	  # 	@player.board_game.squares[6].event.direction = Direction.new('down')
+	  # 	@player.board_game.squares[6].event.number = 4
+	 	# 	@player.run_event
+	 	# 	expect(@player.current_square).to be 2
 
-			@player.current_square = 6
-	  	@player.board_game.squares[6].event.direction = Direction.new('up')
-	  	@player.board_game.squares[6].event.number = 6
-	 		@player.run_event
-	 		expect(@player.current_square).to be 10
+			# @player.current_square = 6
+	  # 	@player.board_game.squares[6].event.direction = Direction.new('up')
+	  # 	@player.board_game.squares[6].event.number = 6
+	 	# 	@player.run_event
+	 	# 	expect(@player.current_square).to be 10
 
-			@player.current_square = 2
-	  	@player.board_game.squares[2].event.direction = Direction.new('down')
-	  	@player.board_game.squares[2].event.number = 6
+			# @player.current_square = 2
+	  # 	@player.board_game.squares[2].event.direction = Direction.new('down')
+	  # 	@player.board_game.squares[2].event.number = 6
 
-	 		@player.run_event
-	 		expect(@player.current_square).to be 0	 		
-	  end
+	 	# 	@player.run_event
+	 	# 	expect(@player.current_square).to be 0	 		
+	  # end
 
   end
 

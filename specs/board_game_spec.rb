@@ -9,44 +9,61 @@ describe BoardGame do
 	 	2.times do |i| 
 	 		players << Player.new("test"+i.to_s)
 	 	end
-	 	
-	 	events = []
-	 	events << Event.new
+
 	 	squares = []
-	 	2.times do |i| 
-	 		squares << Square.new(i, events)
+	 	63.times do |i|
+	 		squares << Square.new(i)
 	 	end
 
 	 	@board_game = BoardGame.new players, squares
   end
 
   describe "when game starts" do
-	  it "should contain at least one square" do
-	 		expect(@board_game.squares.count).to be > 1
+  	describe "the board" do
+	  	it "should contain 63 squares" do
+	 			expect(@board_game.squares.count).to be 63
+	  	end
+
+		  it "should contain at least one player" do
+	 			expect(@board_game.players.count).to be > 1
+	  	end
+
+		  it "must not contain players with the same name" do
+		  	players_names = @board_game.player_names
+				same_name_players = players_names.detect{ |e| players_names.count(e) > 1 }
+		 		expect(same_name_players).to be_nil
+		  end
+		end
+
+		describe "players" do
+		  it "must be on first square" do
+		  	player_squares = []
+		  	@board_game.players.count.times { player_squares << 1 }
+		  	expect(@board_game.players.map(&:current_square)).to eq player_squares
+		  end
+
+		  it "must be playing in a board game" do
+		  	board_game = @board_game.players.map(&:board_game).uniq
+		  	expect(board_game.count).to be 1
+		  	expect(board_game.first).to be @board_game
+		  end
 	  end
 
-	  it "should contain at least one player" do
-	 		expect(@board_game.players.count).to be > 1
+	  describe "event" do
+		  it "on square numbers 5, 14 and 23 must be Happy Goose" do
+		  	expect(@board_game.squares[5].name).to eq "Happy Goose"
+	  		expect(@board_game.squares[14].name).to eq "Happy Goose"
+  			expect(@board_game.squares[23].name).to eq "Happy Goose"
+		  end
+
+		  it "on square numbers 5, 14 and 23 must be Angry Goose" do
+		  	expect(@board_game.squares[9].name).to eq "Angry Goose"
+	  		expect(@board_game.squares[18].name).to eq "Angry Goose"
+  			expect(@board_game.squares[27].name).to eq "Angry Goose"
+		  end
 	  end
 
-	  it "must not contain players with the same name" do
-	  	players_names = @board_game.player_names
-			same_name_players = players_names.detect{ |e| players_names.count(e) > 1 }
-	 		expect(same_name_players).to be_nil
-	  end
-
-	  it "players current square must be first square" do
-	  	player_squares = []
-	  	@board_game.players.count.times { player_squares << 1 }
-	  	expect(@board_game.players.map(&:current_square)).to eq player_squares
-	  end
-	  
-	  it "players must be associated with the board game" do
-	  	board_game = @board_game.players.map(&:board_game).uniq
-	  	expect(board_game.count).to be 1
-	  	expect(board_game.first).to be @board_game
-	  end
-  end
+	end
 
   describe "methods" do
   	it "throw dice should return a number between 1 and 6" do

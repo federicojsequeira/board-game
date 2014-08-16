@@ -3,7 +3,7 @@ require "./event"
 describe Square do 
   
   before :each do
-	 	@square = Square.new 0, Event.new
+	 	@square = Square.new(0)
   end
 
   describe "when initialized" do
@@ -11,5 +11,7 @@ describe Square do
 	 		expect(@square.number).to be >= 0
 	  end
   end
+
+  
 
 end
