@@ -1,4 +1,3 @@
-require "./direction"
 class Event
 	attr_accessor :name
 
@@ -8,6 +7,10 @@ class Event
 
 	def class_name
 		self.class.name
+	end
+
+	def run_on player
+		#each event type defines this method
 	end
 
 end

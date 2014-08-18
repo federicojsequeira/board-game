@@ -56,7 +56,7 @@ describe BoardGame do
   			expect(@board_game.squares[23].event.name).to eq "Happy Goose"
 		  end
 
-		  it "on square numbers 5, 14 and 23 must be Angry Goose" do
+		  it "on square numbers 9, 18 and 27 must be Angry Goose" do
 		  	expect(@board_game.squares[9].event.name).to eq "Angry Goose"
 	  		expect(@board_game.squares[18].event.name).to eq "Angry Goose"
   			expect(@board_game.squares[27].event.name).to eq "Angry Goose"

@@ -1,6 +1,5 @@
 require "./player"
 require "./event"
-require "./direction"
 require "./square"
 require "./board_game"
 describe Player do 
@@ -28,12 +27,26 @@ describe Player do
   describe "when throw dice" do
 	  it "should move to corresponding square" do
 	 		@player.current_square = 0
-	 		@player.move(5)
+	 		@player.move 5
 	 		expect(@player.current_square).to be 5
 
-	 		@player.move(5)
+	 		@player.move 5
 	 		expect(@player.current_square).to be 10
 	  end
+
+    it "should run destiny square event" do
+      @player.current_square = 5
+      @player.run_event
+      expect(@player.current_square).to be 9      
+
+      @player.current_square = 9
+      @player.run_event
+      expect(@player.current_square).to be 5
+
+      @player.current_square = 10
+      @player.run_event
+      expect(@player.current_square).to be 10
+    end
   end
 
   describe "methods" do

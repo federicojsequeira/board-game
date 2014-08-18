@@ -15,6 +15,10 @@ class Player
 		@current_square = final_square
 	end
 
+	def run_event
+		@board_game.squares[current_square].event.run_on self
+	end
+
 	def next_goose_square_number
 		goose_square_numbers = @board_game.goose_square_numbers
 		closest_next_number(goose_square_numbers, self.current_square)
@@ -23,15 +27,6 @@ class Player
 	def previous_goose_square_number
 		goose_square_numbers = @board_game.goose_square_numbers
 		closest_previous_number(goose_square_numbers, self.current_square)
-	end
-
-	def run_event
-		event = @board_game.squares[@current_square].event
-		if event.direction.to_s == "up"
-			self.move(event.number)
-		else
-			self.move(event.number*-1)
-		end
 	end
 
 	private
