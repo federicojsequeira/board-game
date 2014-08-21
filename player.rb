@@ -5,6 +5,10 @@ class Player
 		@name = name
 	end
 
+	def throw_dice
+		rand(1..6)
+	end
+
 	def move dice_number
 		final_square = @current_square + dice_number
 		if final_square >= @board_game.squares.count

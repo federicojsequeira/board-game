@@ -8,9 +8,9 @@ describe AngryGoose do
     end
     @player = players.first
 
-    squares = []
+    squares = {}
     63.times do |i|
-      squares << Square.new(i)
+        squares[i+1] = Square.new(i+1)
     end
 
     board_game = BoardGame.new players, squares
@@ -23,19 +23,17 @@ describe AngryGoose do
 	end
 
 	it "should move player to previous goose" do
-    # goose_square_numbers = [5,9,14,18,23,27]
-    
-    @player.current_square = 9
-    @angry_goose_event.run_on @player
-    expect(@player.current_square).to eq 5
+        @player.current_square = 9
+        @angry_goose_event.run_on @player
+        expect(@player.current_square).to eq 5
 
-    @player.current_square = 23
-    @angry_goose_event.run_on @player
-    expect(@player.current_square).to eq 18
+        @player.current_square = 23
+        @angry_goose_event.run_on @player
+        expect(@player.current_square).to eq 18
 
-    @player.current_square = 26
-    @angry_goose_event.run_on @player
-    expect(@player.current_square).to eq 23    
+        @player.current_square = 26
+        @angry_goose_event.run_on @player
+        expect(@player.current_square).to eq 23    
 	end
 
 end

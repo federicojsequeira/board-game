@@ -8,9 +8,9 @@ describe HappyGoose do
     end
     @player = players.first
 
-    squares = []
+    squares = {}
     63.times do |i|
-      squares << Square.new(i)
+      squares[i+1] = Square.new(i+1)
     end
 
     board_game = BoardGame.new players, squares

@@ -1,5 +1,5 @@
 class BoardGame
-	attr_accessor :players, :squares
+	attr_accessor :players, :squares, :winner
 
 	def initialize players, squares
 		@players = players
@@ -8,18 +8,23 @@ class BoardGame
 			player.current_square = 1
 		end
 
-		squares.each { |sq| sq.event = Event.new }
-		squares[5].event = HappyGoose.new
+		squares.each_value { |sq| sq.event = Event.new }
+		squares[1].event = HappyGoose.new
+		squares[5].event = AngryGoose.new
+		squares[9].event = HappyGoose.new
 		squares[14].event = HappyGoose.new
-		squares[23].event = HappyGoose.new
-		squares[9].event = AngryGoose.new
 		squares[18].event = AngryGoose.new
+		squares[23].event = HappyGoose.new		
 		squares[27].event = AngryGoose.new
+		squares[32].event = HappyGoose.new
+		squares[36].event = AngryGoose.new
+		squares[41].event = AngryGoose.new
+		squares[45].event = HappyGoose.new
+		squares[50].event = AngryGoose.new
+		squares[54].event = HappyGoose.new
+		squares[59].event = AngryGoose.new
+		squares[63].event = Win.new
 		@squares = squares
-	end
-
-	def throw_dice
-		rand(1..6)
 	end
 
 	def player_names
@@ -27,10 +32,11 @@ class BoardGame
 	end
 
 	def goose_square_numbers
-		squares_numbers = @squares.map.with_index do 
-			|square, index| index if (square.event.name == "Happy Goose" || square.event.name == "Angry Goose")
+		numbers = []
+		@squares.each_pair do |number, square| 
+			numbers << number if (square.event.name == "Happy Goose" || square.event.name == "Angry Goose")
 		end
-		squares_numbers.compact
+		numbers
 	end
 
 end

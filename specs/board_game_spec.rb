@@ -10,9 +10,9 @@ describe BoardGame do
 	 		players << Player.new("test"+i.to_s)
 	 	end
 
-	 	squares = []
+	 	squares = {}
 	 	63.times do |i|
-	 		squares << Square.new(i)
+	 		squares[i+1] = Square.new(i+1)
 	 	end
 
 	 	@board_game = BoardGame.new players, squares
@@ -50,26 +50,33 @@ describe BoardGame do
 	  end
 
 	  describe "event" do
-		  it "on square numbers 5, 14 and 23 must be Happy Goose" do
-		  	expect(@board_game.squares[5].event.name).to eq "Happy Goose"
+		  it "on square numbers 9, 14, 23, 32, 45 and 54 must be Happy Goose" do
+		  	expect(@board_game.squares[9].event.name).to eq "Happy Goose"
 	  		expect(@board_game.squares[14].event.name).to eq "Happy Goose"
   			expect(@board_game.squares[23].event.name).to eq "Happy Goose"
+				expect(@board_game.squares[32].event.name).to eq "Happy Goose"  			
+				expect(@board_game.squares[45].event.name).to eq "Happy Goose"
+				expect(@board_game.squares[54].event.name).to eq "Happy Goose"
 		  end
 
-		  it "on square numbers 9, 18 and 27 must be Angry Goose" do
-		  	expect(@board_game.squares[9].event.name).to eq "Angry Goose"
+		  it "on square numbers 5, 18, 27, 36, 41, 50 and 59 must be Angry Goose" do
+		  	expect(@board_game.squares[5].event.name).to eq "Angry Goose"
 	  		expect(@board_game.squares[18].event.name).to eq "Angry Goose"
   			expect(@board_game.squares[27].event.name).to eq "Angry Goose"
+  			expect(@board_game.squares[36].event.name).to eq "Angry Goose"
+  			expect(@board_game.squares[41].event.name).to eq "Angry Goose"
+  			expect(@board_game.squares[50].event.name).to eq "Angry Goose"
+  			expect(@board_game.squares[59].event.name).to eq "Angry Goose"
 		  end
+
+		  it "on square numbers 63 must be Win" do
+		  	expect(@board_game.squares[63].event.name).to eq "Win"
+		  end		  
 	  end
 
 	end
 
   describe "methods" do
-  	it "throw dice should return a number between 1 and 6" do
-		  expect(1..6).to include(@board_game.throw_dice())
-		end
-
 		it "players names should return all players names" do
 			players = @board_game.players
 	 		players.first.name = "test1"
@@ -80,7 +87,7 @@ describe BoardGame do
 		end
 
 		it "goose square numbers should return the square numbers with goose event" do
-			expect(@board_game.goose_square_numbers).to eq [5,9,14,18,23,27]
+			expect(@board_game.goose_square_numbers).to eq [1,5,9,14,18,23,27,32,36,41,45,50,54,59]
 		end
 	end
 
